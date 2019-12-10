@@ -5,7 +5,7 @@ import Home from "../pages/Home";
 import { Register } from "../auth";
 import { Login } from "../auth";
 import Alert from "../Alert";
-import PrivateRoute from "../hoc/PrivateRoute";
+import PrivateRoute from "../helpers/PrivateRoute";
 import AuthState from "../../context/auth/AuthState";
 import AccountState from "../../context/account/AccountState";
 import AlertState from "../../context/alert/AlertState";

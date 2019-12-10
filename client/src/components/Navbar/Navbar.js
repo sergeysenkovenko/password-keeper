@@ -1,10 +1,15 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, logoutUser, user, clearErrors } = authContext;
+  const { isAuthenticated, logoutUser, user, clearErrors, loadUser } = authContext;
+
+  useEffect(() => {
+    loadUser()
+    //eslint-disable-next-line
+  }, [])
 
   const onLogout = e => {
     e.preventDefault();

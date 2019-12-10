@@ -17,26 +17,7 @@ import {
 
 const AccountState = props => {
   const initialState = {
-    accounts: [
-      {
-        id: 1,
-        title: "gmail",
-        login: "dayz654@mail.ru",
-        password: "hr34rhjkfw"
-      },
-      {
-        id: 2,
-        title: "Hotline",
-        login: "dlol@mail.ru",
-        password: "ewerhjkfw"
-      },
-      {
-        id: 3,
-        title: "Rozetka",
-        login: "rozet@mail.ru",
-        password: "543tgdsgd"
-      },
-    ],
+    accounts: [],
     current: null,
     filtered: null,
     error: null

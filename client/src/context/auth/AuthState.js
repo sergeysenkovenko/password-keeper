@@ -28,19 +28,21 @@ const AuthState = props => {
 
   const loadUser = async () => {
     try {
-      const response = await fetch('/api/auth/', {
-        method: "GET",
-        headers: {
-          "x-auth-token": localStorage.getItem("token")
-        },
-      })
-      const res = await response.json()
-      dispatch({
-        type: USER_LOADED,
-        payload: res
-      })
+      if (localStorage.getItem("token")) {
+        const response = await fetch("/api/auth/", {
+          method: "GET",
+          headers: {
+            "x-auth-token": localStorage.getItem("token")
+          }
+        });
+        const res = await response.json();
+        dispatch({
+          type: USER_LOADED,
+          payload: res
+        });
+      }
     } catch (error) {
-      dispatch({type: AUTH_ERROR})
+      dispatch({ type: AUTH_ERROR });
     }
   };
 
