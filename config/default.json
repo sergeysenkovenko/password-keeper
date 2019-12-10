@@ -1,4 +1,4 @@
 {
-    "mongoURI": "",
-    "jwtSecret": "secret"
+    "mongoURI": "mongodb+srv://admin:DgzqT5txeHldkBez@passwordkeeper-g09mc.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "AE367C62FB6FD24382101EB7AC8DD23FBD5A41DA8BB538C7DAFF49EE9DA8E75F"
 }
