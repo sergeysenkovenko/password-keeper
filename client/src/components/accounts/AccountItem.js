@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import AccountContext from "../../context/account/accountContext";
+import AccountBadge from "./AccountBadge";
 import PropTypes from "prop-types";
 
 const AccountItem = ({ account }) => {
   const accountContext = useContext(AccountContext);
   const { deleteAccount, setCurrent, clearCurrent } = accountContext;
-  const { id, title, login, password } = account;
+  const { _id, title, login, password, date } = account;
 
   const onDelete = () => {
-    deleteAccount(id);
+    deleteAccount(_id);
     clearCurrent();
   };
 
@@ -16,7 +17,7 @@ const AccountItem = ({ account }) => {
     <div className="card bg-light">
       <div style={titleStyle}>
         <h3 className="text-primary">{title}</h3>
-        <span className={"badge badge-success"}>5 days ago</span>
+        <AccountBadge date={date}/>
       </div>
       <ul className="list">
         {login && (

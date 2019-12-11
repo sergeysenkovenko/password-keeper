@@ -13,22 +13,33 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_ACCOUNTS: 
+      return {
+        ...state,
+        accounts: action.payload,
+        loading: false
+      }
     case ADD_ACCOUNT:
       return {
         ...state,
-        accounts: [...state.accounts, action.payload]
+        accounts: [action.payload, ...state.accounts]
       };
     case DELETE_ACCOUNT:
       return {
         ...state,
         accounts: state.accounts.filter(
-          account => account.id !== action.payload
+          account => account._id !== action.payload
         ),
         filtered:
           state.filtered !== null
-            ? state.filtered.filter(account => account.id !== action.payload)
+            ? state.filtered.filter(account => account._id !== action.payload)
             : null
       };
+    case ACCOUNT_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      } 
     case SET_CURRENT:
       return {
         ...state,
@@ -43,12 +54,12 @@ export default (state, action) => {
       return {
         ...state,
         accounts: state.accounts.map(account =>
-          account.id === action.payload.id ? action.payload : account
+          account._id === action.payload._id ? action.payload : account
         ),
         filtered:
           state.filtered !== null
             ? state.filtered.map(account =>
-                account.id === action.payload.id ? action.payload : account
+                account._id === action.payload._id ? action.payload : account
               )
             : null
       };

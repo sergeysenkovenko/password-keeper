@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import AccountContext from "../../context/account/accountContext";
+import AlertContext from "../../context/alert/alertContext";
 
 const AccountForm = () => {
   const accountContext = useContext(AccountContext);
+  const alertContext = useContext(AlertContext);
 
   const { addAccount, current, clearCurrent, updateAccount } = accountContext;
 
@@ -13,18 +15,18 @@ const AccountForm = () => {
   });
   const resetFields = () => {
     setAccount({
-        title: "",
-        login: "",
-        password: ""
-      });    
-  }
+      title: "",
+      login: "",
+      password: ""
+    });
+  };
   useEffect(() => {
-      if(current){
-          setAccount(current)
-      } else {
-        resetFields()
-      }
-  }, [accountContext, current])
+    if (current) {
+      setAccount(current);
+    } else {
+      resetFields();
+    }
+  }, [accountContext, current]);
 
   const { title, login, password } = account;
 
@@ -36,18 +38,24 @@ const AccountForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if(current){
+    if (!title || !login || !password) {
+      alertContext.setAlert("Please fill all fields", "danger");
+    }else {
+      if (current) {
         updateAccount(account);
         clearCurrent();
-    } else{
+      } else {
         addAccount(account);
+      }
+      resetFields();
     }
-    resetFields()
   };
 
   return (
     <form className="card" onSubmit={onSubmit}>
-      <h2 className="text-primary">{current ? "Edit Account": "Add new account"}</h2>
+      <h2 className="text-primary">
+        {current ? "Edit Account" : "Add new account"}
+      </h2>
       <input
         type="text"
         name="title"
@@ -72,10 +80,20 @@ const AccountForm = () => {
       <div>
         <input
           type="submit"
-          value={current ? "Update Account": "Add account"}
-          className={`btn btn-block ${!current ? "btn-primary" : "btn-success"}`}
+          value={current ? "Update Account" : "Add account"}
+          className={`btn btn-block ${
+            !current ? "btn-primary" : "btn-success"
+          }`}
         />
-        {current && <button className="btn-light btn btn-block" onClick={clearCurrent} style={{marginBottom: "1.2rem"}}>Cancel</button>}
+        {current && (
+          <button
+            className="btn-light btn btn-block"
+            onClick={clearCurrent}
+            style={{ marginBottom: "1.2rem" }}
+          >
+            Cancel
+          </button>
+        )}
       </div>
     </form>
   );
