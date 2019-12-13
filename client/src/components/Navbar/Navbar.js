@@ -1,10 +1,12 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import AccountContext from "../../context/account/accountContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logoutUser, user, clearErrors, loadUser } = authContext;
+  const { clearAccounts } = useContext(AccountContext);
 
   useEffect(() => {
     loadUser()
@@ -13,6 +15,7 @@ const Navbar = () => {
 
   const onLogout = e => {
     e.preventDefault();
+    clearAccounts();
     logoutUser();
     clearErrors();
   };

@@ -17,7 +17,7 @@ import {
 
 const AccountState = props => {
   const initialState = {
-    accounts: [],
+    accounts: null,
     current: null,
     filtered: null,
     error: null,
@@ -94,6 +94,10 @@ const AccountState = props => {
   }
   };
 
+  const clearAccounts = () => {
+    dispatch({ type: CLEAR_ACCOUNTS })
+  }
+
   const setCurrent = account => {
     dispatch({ type: SET_CURRENT, payload: account });
   };
@@ -127,7 +131,8 @@ const AccountState = props => {
         updateAccount,
         filterAccounts,
         clearFilter,
-        getAccounts
+        getAccounts,
+        clearAccounts
       }}
     >
       {props.children}

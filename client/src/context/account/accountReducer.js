@@ -19,6 +19,11 @@ export default (state, action) => {
         accounts: action.payload,
         loading: false
       }
+    case CLEAR_ACCOUNTS:
+      return {
+        ...state,
+        accounts: null
+      }  
     case ADD_ACCOUNT:
       return {
         ...state,

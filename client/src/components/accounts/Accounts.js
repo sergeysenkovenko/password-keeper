@@ -12,11 +12,7 @@ const Accounts = () => {
     //eslint-disable-next-line
   }, [])
 
-  if(loading) {
-    return <div>Loading...</div>
-  }
-
-  if(accounts.length === 0){
+  if(accounts && !loading && accounts.length === 0){
     return <h3>No accounts yet</h3>
   }
 
@@ -25,7 +21,7 @@ const Accounts = () => {
   }
   
   return (
-    <div style={accountStyle}>
+    accounts && !loading ? ( <div style={accountStyle}>
       {filtered !== null
         ? filtered.map(account => (
             <AccountItem key={account._id} account={account} />
@@ -33,7 +29,8 @@ const Accounts = () => {
         : accounts.map(account => (
             <AccountItem key={account._id} account={account} />
           ))}
-    </div>
+    </div>) : <div>Loading...</div>
+   
   );
 };
 
